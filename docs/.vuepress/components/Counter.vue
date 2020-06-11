@@ -1,5 +1,5 @@
 <template>
-  <div class="counter">
+  <div class="counter" :style="cssProps">
     <p class="counter-count" id="counter-count">{{ count }}</p>
     <div class="counter-actions">
       <button class="counter-button" @click="increment">Add</button>
@@ -16,10 +16,19 @@
 <script>
 export default {
   name: 'Counter',
+  props: ['bgColor'],
   data() {
     return {
+      bgColor: '#41b883',
       count: 0,
       amount: 1
+    }
+  },
+  computed: {
+    cssProps() {
+      return {
+        '--bg-color': this.bgColor || '#41b883'
+      }
     }
   },
   methods: {
@@ -38,7 +47,7 @@ export default {
 
 <style>
 .counter {
-  background-color: #41b883;
+  background-color: var(--bg-color);
   border: 8px solid #35495e;
   color: #fff;
   text-align: center;
